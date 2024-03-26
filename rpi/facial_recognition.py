@@ -46,6 +46,7 @@ def show_four_images_with_bounding_boxes(images, bounding_boxes):
             x1, y1, w, h = bounding_boxes[2*i + j]
             ax[i][j].add_patch(Rectangle((x1, y1), w, h, linewidth=1, edgecolor='r', facecolor='none'))
             ax[i][j].set_title(f"Face #{2*i+j+1}:")
+    plt.tight_layout()
     plt.show()
     return
 
@@ -82,7 +83,7 @@ if '--compare' in sys.argv:
         index = sys.argv.index("--imgs") + 1
     for i in range(4):
         if(index != len(sys.argv)):
-            images[i] = np.asarray(Image.open(sys.argv[index]))
+            images[i] = np.asarray(Image.open(sys.argv[index]))[:,:,:3]
             index += 1
         else:
             input("Take picture? ")
